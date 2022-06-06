@@ -8,16 +8,23 @@ function editNav() {
 }
 
 // DOM Elements
-  
+
+
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+
   // Ajout de la fermeture du modal (x)
 const closeModalBtn = document.querySelectorAll("#close");
+
   // Ajout du sélecteur form
 const formElt = document.querySelectorAll("#form");
+
   // Ajout de la sélection de 'radio'
 const cityElt = document.querySelector('input[type=radio]');
+
+  //ajout de la sélection 'sucess-message' :
+const successMessageElt = document.querySelectorAll('#success-message');
 
 // Form Elements 
 const firstElt = document.getElementById("first");
@@ -25,6 +32,7 @@ const lastElt = document.getElementById("last");
 const emailElt = document.getElementById("email");
 const quantityElt = document.getElementById("quantity");
 const birthdateElt = document.getElementById("birthdate");
+
   // Ajout de la sélection de 'checkbox'
 const checkbox1Elt = document.getElementById('checkbox1');
 
@@ -34,23 +42,28 @@ const checkbox1Elt = document.getElementById('checkbox1');
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
+formElt[0].style.display = "block";
+
 // close modal event
 closeModalBtn.forEach(elt => elt.addEventListener("click", closeModal));
 
+successMessageElt.forEach(elt => elt.addEventListener("click", closeModal))
+
 // Validation form :
-formElt.forEach(elt => elt.addEventListener("submit, validate"));
+formElt.forEach(elt => elt.addEventListener("submit", validate));
+
 
 // Functions -----------
 
-// launch modal form
 
+// launch modal form
 function launchModal() {
   modalbg.style.display = "block";
 }
 // close modal form
-
 function closeModal() {
   modalbg.style.display = "none";
+  successMessageElt[0].style.display ="none";
 }
 
 
@@ -58,6 +71,7 @@ function closeModal() {
 
 function validate (valide) {
   valide.preventDefault();
+  let FormValid = true;
   
   let inputFirst = new InputElement(firstElt, "Veuillez entrer 2 caractères ou plus dans le champ 'prénom'.");
   isLongEnough(firstElt.value.length, 2) ? inputFirst.removeDisplayError() : inputFirst.displayError();
@@ -76,6 +90,8 @@ function validate (valide) {
   
   let inputCondition = new InputElement(checkbox1Elt, "Vous devez vérifier que vous acceptez les termes et conditions.");
   isCheckboxChecked("checkbox1") ? inputCondition.removeDisplayError() : inputCondition.displayError();
+
+  if(formValid) displaySucess();
 }
 
 // vérifier si le format Email est correct 
@@ -99,8 +115,13 @@ function isCheckboxChecked(id) {
   return document.getElementById(id).checked;
 }
 
-
 // Vérifier si la nombre de caractères est respecté :
 function isLongEnough(currentLength, minimumLength) {
   return currentLength >= minimumLength ? true : false;
+}
+
+// Montrer le messsage de réussite du formulaire
+function displaySucess() {
+  formeElt[0].style.display = "none";
+  successMessageElt[0].style.display = "block";
 }
