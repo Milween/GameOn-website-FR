@@ -17,7 +17,7 @@ const closeModalBtn = document.querySelectorAll("#close");
   // Ajout du sélecteur form
 const formElt = document.querySelectorAll("#form");
   // Ajout de la sélection de 'radio'
-const cityElt = document.querySelectorAll('input[type=radio]');
+const cityElt = document.querySelector('input[type=radio]');
 
 // Form Elements 
 const firstElt = document.getElementById("first");
@@ -40,9 +40,6 @@ closeModalBtn.forEach(elt => elt.addEventListener("click", closeModal));
 // Validation form :
 formElt.forEach(elt => elt.addEventListener("submit, validate"));
 
-// Ajout changements sur radio inputs
-cityElt.forEach(elt => elt.addEventListener("change", isRadioChecked));
-
 // Functions -----------
 
 // launch modal form
@@ -62,16 +59,23 @@ function closeModal() {
 function validate (valide) {
   valide.preventDefault();
   
-  const isFirstValid = isLongEnough(firstElt.value.length, 2);  
-  const isLastValid = isLongEnough(lastElt.value.length, 2);
-  const isEmailValid = isStringMatchEmailFormat(emailElt.value);
-  console.log(isEmailValid);
-  const isQuantityValid = isFilledWithNumber(quantityElt.value);
-  console.log(isQuantityValid);
-  const isCityValid = isRadioChecked();
-  console.log(isCityValid);
-  const isConditionsValid = isCheckboxChecked("checkbox1");
-  console.log(isConditionsValid);
+  let inputFirst = new InputElement(firstElt, "Veuillez entrer 2 caractères ou plus dans le champ 'prénom'.");
+  isLongEnough(firstElt.value.length, 2) ? inputFirst.removeDisplayError() : inputFirst.displayError();
+  
+  let inputLast = new InputElement(lastElt, "Veuillez entrer 2 caractères ou plus dans le champ 'nom'.");
+  isLongEnough(lastElt.value.length, 2) ? inputLast.removeDisplayError() : inputLast.displayError();  
+  
+  let inputEmail = new InputElement(emailElt, "Veuillez entrer un format d'email valide.");
+  isStringMatchEmailFormat(emailElt.value) ? inputEmail.removeDisplayError() : inputEmail.displayError();
+  
+  let inputQuantity = new InputElement(quantityElt, "Veuillez entrer un nombre.");
+  isFilledWithNumber(quantityElt.value) ? inputQuantity.removeDisplayError() : inputQuantity.displayError();
+  
+  let inputCity = new InputElement(cityElt, "Vous devez choisir une option.");
+  isRadioChecked() ? inputCity.removeDisplayError() : inputCity.displayError();
+  
+  let inputCondition = new InputElement(checkbox1Elt, "Vous devez vérifier que vous acceptez les termes et conditions.");
+  isCheckboxChecked("checkbox1") ? inputCondition.removeDisplayError() : inputCondition.displayError();
 }
 
 // vérifier si le format Email est correct 
@@ -90,11 +94,10 @@ function isRadioChecked() {
   return document.querySelectorAll("input[type=radio]:checked").length > 0;
 }
 
+// Vérifier si les checkbox sont cochés 
 function isCheckboxChecked(id) {
   return document.getElementById(id).checked;
 }
-
-
 
 
 // Vérifier si la nombre de caractères est respecté :
