@@ -62,6 +62,7 @@
               name="reserve"
               action="index.html"
               method="POST"
+              novalidate
             >
               <div
                 class="formData">
@@ -71,7 +72,6 @@
                   type="text"
                   id="first"
                   name="first"
-                  minlength="2"
                 /><br>
               </div>
               <div
@@ -186,9 +186,8 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
-                  checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
@@ -216,6 +215,7 @@
         Copyright 2014 - 2022, GameOn Inc.
       </p>
     </footer>
+    <script src="InputElement.js"></script>
     <script src="modal.js"></script>
   </body>
 </html>
