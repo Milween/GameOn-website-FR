@@ -23,8 +23,8 @@ const successCloseBtnElt = document.querySelectorAll("#success-close-btn");
 // Ajout du sélecteur form
 const formElt = document.querySelectorAll("#form");
 
-//ajout de la sélection 'sucess-message' :
-const successMessageElt = document.querySelectorAll('#success-message');
+//ajout de la sélection 'success-message' :
+const successMessageElt = document.querySelector('#success-message');
 
 // Form Elements 
 
@@ -69,13 +69,13 @@ formElt.forEach(elt => elt.addEventListener("submit", validate));
 
 // launch modal form
 function launchModal() {
-  modalbg.style.display = "block";
+  modalbg.style.display = "flex";
   formElt[0].style.display = "block";
 }
 // close modal form
 function closeModal() {
   modalbg.style.display = "none";
-  successMessageElt[0].style.display ="none";
+  successMessageElt.style.display = "none";
 }
 
 // Display success message on the modal 
@@ -83,9 +83,9 @@ function closeModal() {
 function displaySucessMessage() {
   let currentHeight = formElt[0].offsetHeight;
 
-  formeElt[0].style.display = 'none';
-  successMessageElt[0].style.display = 'flex';
-  successMessageElt[0].style.height = currentHeight + 'px';
+  formElt[0].style.display = 'none';
+  successMessageElt.style.display = 'flex';
+  successMessageElt.style.height = currentHeight + 'px';
 }
 
 // Vérifier si Firstname est valide + feedback :
@@ -94,7 +94,7 @@ function isFirstValid() {
 
   let inputFirst = new InputElement(firstElt, "Veuillez entrer 2 caractères ou plus dans le champ 'prénom'.");
   let isValid = isLongEnough(firstElt.value.length, 2);
-  removeDisplayError(unputFirst, isValid);
+  removeDisplayError(inputFirst, isValid);
 
   return isValid;
 }
@@ -113,7 +113,7 @@ function isLastValid() {
 
 function isEmailValid() {
   let inputEmail = new InputElement(emailElt, "Veuillez entrer un format d'email valide.");
-  let isValid = isStringMatchEmailFormat(emailElt.value)
+  let isValid = isStringMatchRegexFormat(emailElt.value, mailFormat)
   removeDisplayError(inputEmail, isValid);
 
   return isValid;
@@ -122,7 +122,7 @@ function isEmailValid() {
 // Vérifier si birthday est valide + feedback :
   
 function isBirthdateValid () {
-  let inputBirthdate = new InputElement(birthdayElt, "Veuillez saisir une date de naissance valide.");
+  let inputBirthdate = new InputElement(birthdateElt, "Veuillez saisir une date de naissance valide.");
   let isValid = isStringMatchRegexFormat(birthdateElt.value, birthdateFormat)
   removeDisplayError(inputBirthdate, isValid);
   
@@ -132,7 +132,7 @@ function isBirthdateValid () {
 // Vérifier si la quantity est valide + feedback : 
 
 function isQuantityValid () {
-  let inputQuantity = new InputElement(quantityElt, "Vous devez choisir une option.");
+  let inputQuantity = new InputElement(quantityElt, "Vous devez choisir un nombre.");
   let isValid = isStringMatchRegexFormat(quantityElt.value, positiveIntegerFormat);
   removeDisplayError(inputQuantity, isValid);
   
@@ -144,7 +144,7 @@ function isQuantityValid () {
 function isCityValid() {
 
 let inputCity = new InputElement(cityElt, "Vous devez choisir une option.");
-let isValid = isRadioChecked();
+let isValid = isRadioChecked("checkbox1");
 removeDisplayError (inputCity, isValid);
 
 return isValid;
@@ -193,9 +193,9 @@ function isStringMatchRegexFormat(str, strFormat) {
 }
 
 
-// Vérifier si c'est bien un nombre ou vide
-function isFilledWithNumber(data) {
-  return data != "" && !isNaN(data) ? true : false;
+// Vérifier si au moins un bouton est checké :
+function isRadioChecked() {
+  return document.querySelectorAll("input[type=radio]:checked").length > 0;
 }
 
 // Vérifier si les checkbox sont cochés 
@@ -211,5 +211,5 @@ function isLongEnough(currentLength, minimumLength) {
 // Montrer le messsage de réussite du formulaire :
 function displaySucess() {
   formeElt[0].style.display = "none";
-  successMessageElt[0].style.display = "block";
+  successMessageElt.style.display = "block";
 }
