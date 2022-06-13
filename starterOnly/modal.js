@@ -7,6 +7,7 @@ function editNav() {
   }
 }
 
+
 // DOM Elements
 
 
@@ -36,6 +37,7 @@ const birthdateElt = document.getElementById("birthdate");
   // Ajout de la sélection de 'checkbox'
 const checkbox1Elt = document.getElementById('checkbox1');
 
+
 // Events -----------
 
 
@@ -47,7 +49,7 @@ formElt[0].style.display = "block";
 // close modal event
 closeModalBtn.forEach(elt => elt.addEventListener("click", closeModal));
 
-successMessageElt.forEach(elt => elt.addEventListener("click", closeModal))
+successMessageElt.forEach(elt => elt.addEventListener("click", closeModal));
 
 // Validation form :
 formElt.forEach(elt => elt.addEventListener("submit", validate));
@@ -120,7 +122,7 @@ function isLongEnough(currentLength, minimumLength) {
   return currentLength >= minimumLength ? true : false;
 }
 
-// Montrer le messsage de réussite du formulaire
+// Montrer le messsage de réussite du formulaire :
 function displaySucess() {
   formeElt[0].style.display = "none";
   successMessageElt[0].style.display = "block";
