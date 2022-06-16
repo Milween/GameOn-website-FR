@@ -24,7 +24,7 @@ const successCloseBtnElt = document.querySelectorAll("#success-close-btn");
 const formElt = document.querySelectorAll("#form");
 
 //ajout de la sélection 'success-message' :
-const successMessageElt = document.querySelector('#success-message');
+const successMessageElt = document.querySelector("#success-message");
 
 // Form Elements 
 
@@ -35,10 +35,10 @@ const quantityElt = document.getElementById("quantity");
 const birthdateElt = document.getElementById("birthdate");
 
 // Ajout de la sélection de 'checkbox'
-const checkbox1Elt = document.getElementById('checkbox1');
+const checkbox1Elt = document.getElementById("checkbox1");
 
 // Ajout de la sélection de 'radio'
-const cityElt = document.querySelector('input[type=radio]');
+const cityElt = document.querySelector("input[type=radio]");
 
 // Regex : Trouver sur le net à voir avec Steeve.
 
@@ -83,9 +83,9 @@ function closeModal() {
 function displaySucessMessage() {
   let currentHeight = formElt[0].offsetHeight;
 
-  formElt[0].style.display = 'none';
-  successMessageElt.style.display = 'flex';
-  successMessageElt.style.height = currentHeight + 'px';
+  formElt[0].style.display = "none";
+  successMessageElt.style.display = "flex";
+  successMessageElt.style.height = currentHeight + "px";
 }
 
 // Vérifier si Firstname est valide + feedback :

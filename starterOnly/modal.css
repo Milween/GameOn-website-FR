@@ -48,7 +48,7 @@ img {
   padding: 12px 12px;
   margin: 5px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 17px;
   font-family: Roboto, sans-serif;
 }
 
@@ -500,7 +500,7 @@ footer {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -543,7 +543,7 @@ footer {
 
 @media screen and (max-width: 375px) {  
   .hero-headline {
-    font-size: 2,5rem;
+    font-size: 2.5rem;
   }
 }
 
