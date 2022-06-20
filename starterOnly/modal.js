@@ -14,13 +14,13 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 
-  // Ajout de la fermeture du modal (x)
+  // Ajout de la sélection de la fermeture du modal (x)
 const closeModalBtn = document.querySelectorAll("#close");
 
 //Ajout de la sélection 'fermeture du bouton success'
 const successCloseBtnElt = document.querySelectorAll("#success-close-btn");
 
-// Ajout du sélecteur form
+// Ajout du sélecteur form :
 const formElt = document.querySelectorAll("#form");
 
 //ajout de la sélection 'success-message' :
@@ -42,6 +42,7 @@ const cityElt = document.querySelector("input[type=radio]");
 
 // Regex : Trouver sur le net à voir avec Steeve.
 
+const nameFormat = /^[A-Z][a-z-]+$/;
 const birthdateFormat = /^(19|20)\d{2}[-](0?[1-9]|1[012])[-](0[1-9]|[12]\d|3[01])$/;
 const mailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 const positiveIntegerFormat = /^\+?(0|[1-9]\d*)$/; 
@@ -78,7 +79,7 @@ function closeModal() {
   successMessageElt.style.display = "none";
 }
 
-// Display success message on the modal 
+// Display success message on the modal :
 
 function displaySucessMessage() {
   let currentHeight = formElt[0].offsetHeight;
@@ -93,7 +94,7 @@ function displaySucessMessage() {
 function isFirstValid() {
 
   let inputFirst = new InputElement(firstElt, "Veuillez entrer 2 caractères ou plus dans le champ 'prénom'.");
-  let isValid = isLongEnough(firstElt.value.length, 2);
+  let isValid = isStringMatchRegexFormat(firstElt.value, nameFormat);
   removeDisplayError(inputFirst, isValid);
 
   return isValid;
@@ -103,7 +104,7 @@ function isFirstValid() {
 
 function isLastValid() {
   let inputLast = new InputElement(lastElt, "Veuillez entrer 2 caractères ou plus dans le champ 'nom'.");
-  let isValid = isLongEnough(lastElt.value.length, 2);
+  let isValid = isStringMatchRegexFormat(lastElt.value, nameFormat);
   removeDisplayError(inputLast, isValid);  
  
   return isValid;
@@ -198,18 +199,13 @@ function isRadioChecked() {
   return document.querySelectorAll("input[type=radio]:checked").length > 0;
 }
 
-// Vérifier si les checkbox sont cochés 
+// Vérifier si les checkbox sont cochés ;
 function isCheckboxChecked(id) {
   return document.getElementById(id).checked;
 }
 
-// Vérifier si la nombre de caractères est respecté :
-function isLongEnough(currentLength, minimumLength) {
-  return currentLength >= minimumLength ? true : false;
-}
-
 // Montrer le messsage de réussite du formulaire :
 function displaySucess() {
-  formeElt[0].style.display = "none";
+  formElt[0].style.display = "none";
   successMessageElt.style.display = "block";
 }
