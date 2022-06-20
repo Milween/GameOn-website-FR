@@ -42,10 +42,10 @@ const cityElt = document.querySelector("input[type=radio]");
 
 // Regex : Trouver sur le net à voir avec Steeve.
 
-const nameFormat = /^[A-Z][a-z-]+$/;
+const nameFormat = /^[A-Za-z-]+$/;
 const birthdateFormat = /^(19|20)\d{2}[-](0?[1-9]|1[012])[-](0[1-9]|[12]\d|3[01])$/;
 const mailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
-const positiveIntegerFormat = /^\+?(0|[1-9]\d*)$/; 
+const positiveIntegerFormat = /^\+?(0|[1-9]\d*)$/;
 
 
 // Events -----------
@@ -61,7 +61,6 @@ successCloseBtnElt.forEach(elt => elt.addEventListener("click", closeModal));
 
 // Validation form :
 formElt.forEach(elt => elt.addEventListener("submit", validate));
-
 
 
 
@@ -93,7 +92,7 @@ function displaySucessMessage() {
 
 function isFirstValid() {
 
-  let inputFirst = new InputElement(firstElt, "Veuillez entrer 2 caractères ou plus dans le champ 'prénom'.");
+  let inputFirst = new InputElement(firstElt, "Veuillez entrer 2 caractères ou plus dans le champ 'Prénom'.");
   let isValid = isStringMatchRegexFormat(firstElt.value, nameFormat);
   removeDisplayError(inputFirst, isValid);
 
@@ -125,9 +124,11 @@ function isEmailValid() {
 function isBirthdateValid () {
   let inputBirthdate = new InputElement(birthdateElt, "Veuillez saisir une date de naissance valide.");
   let isValid = isStringMatchRegexFormat(birthdateElt.value, birthdateFormat)
-  removeDisplayError(inputBirthdate, isValid);
+  const birthdate = birthdateElt.valueAsDate;
+  const now = new Date();
+  removeDisplayError(inputBirthdate, isValid && (now >= birthdate));
   
-  return isValid;
+  return isValid && (now >= birthdate);
 }
 
 // Vérifier si la quantity est valide + feedback : 
